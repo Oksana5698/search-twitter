@@ -1,0 +1,23 @@
+import tweepy
+
+# Задайте свої ключі доступу до Twitter API
+consumer_key = 'YOUR_CONSUMER_KEY'
+consumer_secret = 'YOUR_CONSUMER_SECRET'
+access_token = 'YOUR_ACCESS_TOKEN'
+access_token_secret = 'YOUR_ACCESS_TOKEN_SECRET'
+
+# Аутентифікація з використанням ключів доступу
+auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+auth.set_access_token(access_token, access_token_secret)
+
+# Створення об'єкту Tweepy API
+api = tweepy.API(auth)
+
+# Функція, що шукає твіти за ключовим словом
+def search_tweets(keyword, count=10):
+    tweets = api.search(q=keyword, lang='en', count=count)
+    for tweet in tweets:
+        print(f"{tweet.user.screen_name}: {tweet.text}")
+
+# Приклад використання
+search_tweets('example keyword', count=5)
